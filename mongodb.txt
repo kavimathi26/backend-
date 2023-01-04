@@ -34,13 +34,7 @@ Separate count for both
 4. db.inspections.aggregate([{$match:{$or:[{result:"Pass",result:"Re-inspection"}]}}])
 db.inspections.aggregate([{$match:{result:"Pass"}}])
 db.inspections.aggregate([{$match:{result:"Re-inspection"}}])
-
-
 5. db.sales.find({"saleDate":{$gte:ISODate("2014-08-01"),$lt:ISODate("2014-08-31")},"customer.age":{$gte:60}})
-
-
-
-
-7.db.movies.aggregate([{$match:{year:1999}}],{$avg:"imdb.rating"})
-7. db.movies.aggregate([{$group : {$match:{year:1999},  {$avg :"$imdb.$rating"}}}])
+6. db.sales.find({}, { _id: false, purchaseMethod: 1, couponUsed: 1, storeLocation: 1}).sort({storeLocation: -1});
+7. db.movies.aggregate([{$match:{year:1999}}],{$avg:"imdb.rating"})
 8. db.theaters.findOne({"location.address.state":"VA"})
