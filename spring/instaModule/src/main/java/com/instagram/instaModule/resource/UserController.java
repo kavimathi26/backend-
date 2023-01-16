@@ -30,7 +30,7 @@ public class UserController {
     @PostMapping
     public String createUser(@RequestBody User user) throws Exception {
         userService.createUser(user);
-        return "User with user-id " + user.getProfileId() + " created";
+        return user.getProfileId() + "id created";
     }
 
 }
