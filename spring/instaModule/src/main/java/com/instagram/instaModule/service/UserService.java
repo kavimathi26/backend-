@@ -20,10 +20,12 @@ public class UserService {
     }
     public void createUser(User user)  {
         userDetails.createUser(user);
+
     }
-//int k =9;
-//    public List<User> findAl() {
-//        return UserDetails.findAll();
-//    }
+
+    public User updateUser(String profileId, String name, String description) {
+    return userDetails.updateUser(profileId, name, description);
+    }
+
 
 }

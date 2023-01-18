@@ -29,8 +29,18 @@ public class UserController {
     }
     @PostMapping
     public String createUser(@RequestBody User user) throws Exception {
-        userService.createUser(user);
-        return user.getProfileId() + "id created";
+        if(userDetails.getUserByProfileId(user.getProfileId())!=null) {
+            return "user exists";
+        }
+        else {
+            userService.createUser(user);
+            return user.getProfileId() + "id created";
+        }
     }
 
+@PutMapping("/profileId/{profileId}/name/{name}/description/{description}")
+public User updateUser(@PathVariable String profileId, @PathVariable String name, @PathVariable String description) throws Exception {
+    userService.updateUser(profileId, name, description);
+    return getUserById(profileId);
+}
 }
