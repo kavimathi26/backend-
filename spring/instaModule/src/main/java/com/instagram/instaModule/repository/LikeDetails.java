@@ -52,6 +52,7 @@ public class LikeDetails {
         like.setProfileId(profileId);
         like.setLikedOrNot(true);
         like.isLikedOrNot();
+        like.setLikedTime(System.currentTimeMillis());
         Set<Object> hashSet = new HashSet<Object>();
 //        like = (Object) like;
 //        like.setHashSet();
@@ -70,6 +71,7 @@ public class LikeDetails {
         like.setPostid(postId);
         like.setProfileId(profileId);
         like.setLikedOrNot(false);
+        like.setLikedTime(System.currentTimeMillis());
         mongoTemplate.save(like);
         System.out.println(like);
         return like;

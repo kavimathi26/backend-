@@ -22,5 +22,6 @@ public class Like {
     private String postid;
     private String profileId;
     private boolean likedOrNot;
+    private long likedTime;
 
 }
