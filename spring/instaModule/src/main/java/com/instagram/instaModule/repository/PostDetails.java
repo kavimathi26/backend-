@@ -28,10 +28,11 @@ public class PostDetails {
     User user = new User();
     post.setProfileId(profileId);
     post.setPosts(posts);
-    user.setPostCount(getPostsByProfileId(profileId).stream().count()+1);
     post.setPostUploadedTime(System.currentTimeMillis());
     System.out.println(post.getPostUploadedTime());
     mongoTemplate.save(post);
+    user.setPostCount(getPostsByProfileId(profileId).stream().count());
+//    user.setPostCount(getPostsByProfileId(profileId).size());
     System.out.println(user.getPostCount());
     return post;
     }
@@ -42,10 +43,9 @@ public class PostDetails {
     public void deletePost(String postId) {
         mongoTemplate.remove(Query.query(Criteria.where("postId").is(postId)), Post.class);
     }
-//    public List getTopPosts() {
-//        Query query = new Query();
-//        query.limit(1);
-//        query.with(new Sort(Sort.Direction.DESC, "postUploadedTime"));
-//        return mongoTemplate.find(query,Post.class);
-//    }
+    public List getTopPosts() {
+        Query query = new Query();
+        query.with(Sort.by(Sort.Direction.DESC, "postUploadedTime"));
+        return mongoTemplate.find(query,Post.class);
+    }
 }
