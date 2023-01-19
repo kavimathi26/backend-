@@ -22,12 +22,12 @@ public class PostController {
     @Autowired
     PostService postService;
     @PostMapping("/{profileId}")
-    public String createPost(@PathVariable String profileId,@RequestBody String posts) {
+    public String createPost(@PathVariable String profileId,@RequestParam String posts, @RequestParam String caption) {
         if(userDetails.getUserByProfileId(profileId)== null) {
             return "no user for the given id";
         }
-        postService.createPost(profileId, posts);
-        return posts;
+        postService.createPost(profileId, posts, caption);
+        return "created post for " + profileId;
     }
     @GetMapping
     public List<Post> findAll() {
@@ -46,4 +46,5 @@ public class PostController {
     public List getTopPosts() {
         return postDetails.getTopPosts();
     }
+//    @PostMapping("/postId/{postId}/")
 }

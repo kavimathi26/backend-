@@ -3,13 +3,10 @@ import com.instagram.instaModule.model.Post;
 import com.instagram.instaModule.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,10 +27,11 @@ public class PostDetails {
         System.out.println("count of post : "+user.getPostCount());
         return user.getPostCount();
     }
-    public Post createPost(String profileId,String posts) { //add-post
+    public Post createPost(String profileId, String posts, String caption) { //add-post
     Post post = new Post();
     post.setProfileId(profileId);
     post.setPosts(posts);
+    post.setCaption(caption);
     post.setPostUploadedTime(System.currentTimeMillis());
     System.out.println(post.getPostUploadedTime());
     mongoTemplate.save(post);

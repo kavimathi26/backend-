@@ -18,9 +18,6 @@ import java.util.ArrayList;
 public class Post {
 
     public Post() {
-//        this.postId="jkkjgui";
-//        this.profileId="kavi13";
-//        this.postsCount=0;
 //        this.postsLikes=0;
 //        this.commentsForPost="";
 //        this.commentsLikes=0;
@@ -30,8 +27,8 @@ public class Post {
     private String postId;
     private String profileId;
     private long postUploadedTime;
+    private String caption;
 
-//    private long postsCount;
 //    private long postsLikes;
 //    private String commentsForPost;
 //    private long commentsLikes;
