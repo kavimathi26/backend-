@@ -33,7 +33,7 @@ public class PostController {
     public List<Post> findAll() {
         return postDetails.findAll();
     }
-    @GetMapping("/profileId/{profileId}")
+    @GetMapping("/profileId/{profileId}")//all small letters
     public List findAll(@PathVariable String profileId) {
         return postDetails.getPostsByProfileId(profileId);
     }
@@ -46,5 +46,5 @@ public class PostController {
     public List getTopPosts() {
         return postDetails.getTopPosts();
     }
-//    @PostMapping("/postId/{postId}/")
+
 }
