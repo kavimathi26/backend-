@@ -1,6 +1,7 @@
 package com.instagram.instaModule.repository;
 
 
+import com.instagram.instaModule.model.Post;
 import com.instagram.instaModule.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,9 +30,11 @@ public class UserDetails {
     }
     public List<User> findAll() {
         Query query = new Query();
-//        query.addCriteria(Criteria.where("profileId"));
         return mongoTemplate.find(query, User.class);
     }
+//    public List<Post> findAll("post") {
+//
+//    }
 
     public User createUser(User user) {
         mongoTemplate.save(user);
@@ -47,15 +50,7 @@ public class UserDetails {
 
     }
 
-    public User createPost(User user) { //add-post
-        System.out.println(user.getPostCount());
-        user.getPosts().add("new post");
-        long c = user.getPostCount();
-        c += user.getPosts().size();
-        user.setPostCount(c);
-        mongoTemplate.save(user);
-        return user;
-    }
+
     public void deleteById(String profileId) {
         mongoTemplate.remove(Query.query(Criteria.where("profileId").is(profileId)), User.class);
     }

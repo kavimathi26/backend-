@@ -26,8 +26,11 @@ public class User {
     private String description;
     private long followersCount;
     private long followingCount;
-    private ArrayList posts;
     private long postCount;
+//    private ArrayList<String> posts = new ArrayList<String>();
+//    ArrayList<String> list=new ArrayList<String>();
+//    private ArrayList posts;
+//    private long postCount;
 
 //    private long totalPosts;
 //    private long postId;

@@ -1,5 +1,6 @@
 package com.instagram.instaModule.resource;
 
+import com.instagram.instaModule.service.PostService;
 import com.instagram.instaModule.service.UserService;
 import com.instagram.instaModule.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    PostService postService;
     @Autowired
     UserDetails userDetails;
     @GetMapping("/userId/{userId}")
@@ -37,7 +40,11 @@ public class UserController {
             return user.getProfileId() + "id created";
         }
     }
-
+//    @PutMapping("/profileId/{profileId}")
+//    public User updateUser(@PathVariable User user) throws Exception {
+//        return userService.updateUser(user.getProfileId());
+////        return user;
+//    }
 @PutMapping("/profileId/{profileId}/name/{name}/description/{description}")
 public User updateUser(@PathVariable String profileId, @PathVariable String name, @PathVariable String description) throws Exception {
     userService.updateUser(profileId, name, description);
