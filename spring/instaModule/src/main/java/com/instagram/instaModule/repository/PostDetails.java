@@ -48,9 +48,14 @@ public class PostDetails {
         System.out.println("after deletion: "+profileId);
         countOfPosts(profileId);
     }
-    public List getTopPosts() {
+    public List getTopPosts(String page, String size) {
         Query query = new Query();
-        query.limit(5);
+        query.with(Sort.by(Sort.Direction.DESC, "postUploadedTime"));
+        query.skip(Integer.parseInt(page) * Integer.parseInt(size)).limit(Integer.parseInt(size));
+        return mongoTemplate.find(query,Post.class);
+    }
+    public List getAllTopPosts() {
+        Query query = new Query();
         query.with(Sort.by(Sort.Direction.DESC, "postUploadedTime"));
         return mongoTemplate.find(query,Post.class);
     }

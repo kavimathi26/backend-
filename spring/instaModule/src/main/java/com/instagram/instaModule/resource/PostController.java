@@ -3,14 +3,22 @@ package com.instagram.instaModule.resource;
 import com.instagram.instaModule.model.Post;
 import com.instagram.instaModule.model.User;
 import com.instagram.instaModule.repository.PostDetails;
+//import com.instagram.instaModule.repository.PostRepository;
 import com.instagram.instaModule.repository.UserDetails;
 import com.instagram.instaModule.service.PostService;
 import com.instagram.instaModule.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/post")
@@ -21,6 +29,8 @@ public class PostController {
     UserDetails userDetails;
     @Autowired
     PostService postService;
+//    @Autowired
+//    PostRepository postRepository;
     @PostMapping("/{profileId}")
     public String createPost(@PathVariable String profileId,@RequestParam String posts, @RequestParam String caption) {
         if(userDetails.getUserByProfileId(profileId)== null) {
@@ -33,7 +43,15 @@ public class PostController {
     public List<Post> findAll() {
         return postDetails.findAll();
     }
+
+    @GetMapping("/topPosts/page/{page}/size/{size}")
+    public List<Post> getTopPosts(@PathVariable String page, @PathVariable String size) {
+        return postDetails.getTopPosts(page, size);
+    }
+
+
     @GetMapping("/profileId/{profileId}")//all small letters
+//    Page<Post> persons = postRepository.findByName("Alex", PageRequest.of(0, 100));
     public List findAll(@PathVariable String profileId) {
         return postDetails.getPostsByProfileId(profileId);
     }
@@ -44,7 +62,7 @@ public class PostController {
     }
     @GetMapping("/topPosts")
     public List getTopPosts() {
-        return postDetails.getTopPosts();
+        return postDetails.getAllTopPosts();
     }
 
 }
