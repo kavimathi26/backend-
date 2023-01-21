@@ -3,7 +3,6 @@ package com.instagram.instaModule.resource;
 import com.instagram.instaModule.model.Post;
 import com.instagram.instaModule.model.User;
 import com.instagram.instaModule.repository.PostDetails;
-//import com.instagram.instaModule.repository.PostRepository;
 import com.instagram.instaModule.repository.UserDetails;
 import com.instagram.instaModule.service.PostService;
 import com.instagram.instaModule.service.UserService;
@@ -29,8 +28,6 @@ public class PostController {
     UserDetails userDetails;
     @Autowired
     PostService postService;
-//    @Autowired
-//    PostRepository postRepository;
     @PostMapping("/{profileId}")
     public String createPost(@PathVariable String profileId,@RequestParam String posts, @RequestParam String caption) {
         if(userDetails.getUserByProfileId(profileId)== null) {
@@ -41,19 +38,19 @@ public class PostController {
     }
     @GetMapping
     public List<Post> findAll() {
-        return postDetails.findAll();
+        return postService.findAll();
     }
 
     @GetMapping("/topPosts/page/{page}/size/{size}")
     public List<Post> getTopPosts(@PathVariable String page, @PathVariable String size) {
-        return postDetails.getTopPosts(page, size);
+        return postService.getTopPosts(page, size);
     }
 
 
     @GetMapping("/profileId/{profileId}")//all small letters
 //    Page<Post> persons = postRepository.findByName("Alex", PageRequest.of(0, 100));
     public List findAll(@PathVariable String profileId) {
-        return postDetails.getPostsByProfileId(profileId);
+        return postService.getPostsByProfileId(profileId);
     }
 
     @DeleteMapping("/postId/{postId}")
@@ -62,7 +59,7 @@ public class PostController {
     }
     @GetMapping("/topPosts")
     public List getTopPosts() {
-        return postDetails.getAllTopPosts();
+        return postService.getAllTopPosts();
     }
 
 }

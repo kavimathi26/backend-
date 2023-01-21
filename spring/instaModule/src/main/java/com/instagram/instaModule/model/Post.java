@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -24,7 +25,7 @@ public class Post {
     }
     private String posts;
     @Id
-    private String postId;
+    private UUID postId;
     private String profileId;
     private long postUploadedTime;
     private String caption;

@@ -18,6 +18,10 @@ public class PostDetails {
     public List<Post> getPostsByProfileId(String profileId) {
         return mongoTemplate.find(Query.query(Criteria.where("profileId").is(profileId)),Post.class);
     }
+    public Post getPostByPostId(String postId) {
+//        return mongoTemplate.findOne(Query.query(Criteria.where("profileId").is(profileId)), User.class);
+        return mongoTemplate.findOne(Query.query(Criteria.where("postId").is(postId)),Post.class);
+    }
 
     public long countOfPosts(String profileId) {
         User user = new User();
@@ -27,8 +31,9 @@ public class PostDetails {
         System.out.println("count of post : "+user.getPostCount());
         return user.getPostCount();
     }
-    public Post createPost(String profileId, String posts, String caption) { //add-post
+    public Post createPost(String caption,String profileId, String posts) { //add-post
     Post post = new Post();
+//    post.setPostId(postId);
     post.setProfileId(profileId);
     post.setPosts(posts);
     post.setCaption(caption);
@@ -59,4 +64,5 @@ public class PostDetails {
         query.with(Sort.by(Sort.Direction.DESC, "postUploadedTime"));
         return mongoTemplate.find(query,Post.class);
     }
+
 }
