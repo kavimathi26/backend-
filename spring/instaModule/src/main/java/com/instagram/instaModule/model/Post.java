@@ -25,7 +25,7 @@ public class Post {
     }
     private String posts;
     @Id
-    private UUID postId;
+    private String postId;
     private String profileId;
     private long postUploadedTime;
     private String caption;
