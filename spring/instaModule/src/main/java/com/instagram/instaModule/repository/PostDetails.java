@@ -31,7 +31,7 @@ public class PostDetails {
         System.out.println("count of post : "+user.getPostCount());
         return user.getPostCount();
     }
-    public Post createPost(String caption,String profileId, String posts) { //add-post
+    public Post createPost(String profileId, String posts,String caption) { //add-post
     Post post = new Post();
 //    post.setPostId(postId);
     post.setProfileId(profileId);
