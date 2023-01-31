@@ -15,6 +15,8 @@ import java.util.List;
 public class PostDetails {
     @Autowired
     private MongoTemplate mongoTemplate;
+    @Autowired
+    UserDetails userDetails;
     public List<Post> getPostsByProfileId(String profileId) {
         return mongoTemplate.find(Query.query(Criteria.where("profileId").is(profileId)),Post.class);
     }
@@ -23,13 +25,18 @@ public class PostDetails {
         return mongoTemplate.findOne(Query.query(Criteria.where("postId").is(postId)),Post.class);
     }
 
-    public long countOfPosts(String profileId) {
-        User user = new User();
-        Post post = new Post();
-        post.setProfileId(profileId);
+    public void countOfPosts(String profileId) {
+//        User user = new User();
+//        Post post = new Post();
+//        post.setProfileId(profileId);
+//        user.setPostCount(getPostsByProfileId(profileId).size());
+//        System.out.println("count of post : "+user.getPostCount());
+//        return user.getPostCount();
+        User user = userDetails.getUserByProfileId(profileId);
         user.setPostCount(getPostsByProfileId(profileId).size());
-        System.out.println("count of post : "+user.getPostCount());
-        return user.getPostCount();
+        System.out.println(getPostsByProfileId(profileId).size());
+        System.out.println(user.getPostCount());
+        mongoTemplate.save(user);
     }
     public Post createPost(String profileId, String posts,String caption) { //add-post
     Post post = new Post();

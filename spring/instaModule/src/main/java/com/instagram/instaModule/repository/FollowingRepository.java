@@ -1,6 +1,7 @@
 package com.instagram.instaModule.repository;
 
 import com.instagram.instaModule.model.Following;
+import com.instagram.instaModule.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -14,6 +15,11 @@ public class FollowingRepository {
     UserDetails userDetails;
     @Autowired
     MongoTemplate mongoTemplate;
+//    @Autowired
+//    User user;
+    public Following getProfileByProfileId(String profileId) {
+        return mongoTemplate.findOne(Query.query(Criteria.where("profileId").is(profileId)),Following.class);
+    }
     public void addInitialData(String profileId) {
 
         Query query = new Query().addCriteria(Criteria.where("profileId").is(profileId));
@@ -23,10 +29,9 @@ public class FollowingRepository {
             following.setProfileId(profileId);
             mongoTemplate.save(following);
         }
-        else {
-            System.out.println(mongoTemplate.findOne(query, Following.class));
-            System.out.println("hi");
-        }
+        User user = userDetails.getUserByProfileId(profileId);
+        user.setFollowingCount(getProfileByProfileId(profileId).getFollowingList().size());
+        mongoTemplate.save(user);
     }
 
     public void addFollowing(String profileId,String tobefollowprofileid) {
