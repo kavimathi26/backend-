@@ -12,11 +12,11 @@ public class FollowingController {
     UserDetails userDetails;
     @Autowired
     FollowingService followingService;
-    @PostMapping("/profileId/{profileId}/follow/{tobefollowprofileid}")
+    @PutMapping("/profileId/{profileId}/follow/{tobefollowprofileid}")
     public String addFollowing(@PathVariable String profileId, @PathVariable String tobefollowprofileid){
         if(userDetails.getUserByProfileId(profileId)!=null && userDetails.getUserByProfileId(tobefollowprofileid)!=null)
         {
-            followingService.addFollowing(tobefollowprofileid);
+            followingService.addFollowing(profileId,tobefollowprofileid);
         }
         else {
             return "No profile found for the given id to follow";
@@ -25,7 +25,7 @@ public class FollowingController {
     }
     @GetMapping("/profileid/{profileid}")
     public String displayFollowing(@PathVariable String profileid) {
-        if(userDetails.getUserByProfileId(profileid)!=null) {
+        if(userDetails.getUserByProfileId(profileid)==null) {
             return "no profile found";
         }
         followingService.displayFollowing(profileid);

@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 public class FollowingService {
     @Autowired
     FollowingRepository followingRepository;
-    public void addFollowing(String profileId) {
-        followingRepository.addFollowing(profileId);
+    public void addFollowing(String profileId,String tobefollowprofileid) {
+        followingRepository.addInitialData(profileId);
+        followingRepository.addFollowing(profileId,tobefollowprofileid);
     }
 
     public void displayFollowing(String profileid) {
