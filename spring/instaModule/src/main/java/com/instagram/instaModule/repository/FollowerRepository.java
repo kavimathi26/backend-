@@ -25,7 +25,7 @@ public class FollowerRepository {
         Query query = new Query().addCriteria(Criteria.where("profileId").is(profileId));
         Update update = new Update();
         update.set("profileId",profileId);
-        update.push("followerList",profileIdToBeFollowed);
+        update.addToSet("followerList",profileIdToBeFollowed);
         mongoTemplate.findAndModify(query, update, Follower.class);
     }
 }

@@ -33,7 +33,7 @@ public class FollowingRepository {
         Query query = new Query().addCriteria(Criteria.where("profileId").is(profileId));
         Update update = new Update();
         update.set("profileId",profileId);
-        update.push("followingList",tobefollowprofileid);
+        update.addToSet("followingList",tobefollowprofileid);
         mongoTemplate.findAndModify(query, update, Following.class);
     }
 
