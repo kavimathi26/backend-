@@ -12,7 +12,7 @@ public class FollowingController {
     UserDetails userDetails;
     @Autowired
     FollowingService followingService;
-    @PutMapping("/profileId/{profileId}/follow/{tobefollowprofileid}")
+    @PutMapping("/profileId/{profileId}/following/{tobefollowprofileid}")
     public String addFollowing(@PathVariable String profileId, @PathVariable String tobefollowprofileid){
         if(userDetails.getUserByProfileId(profileId)!=null && userDetails.getUserByProfileId(tobefollowprofileid)!=null)
         {
