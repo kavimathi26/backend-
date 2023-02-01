@@ -29,6 +29,7 @@ public class Post {
     private String profileId;
     private long postUploadedTime;
     private String caption;
+    private long likesCount;
 
 //    private long postsLikes;
 //    private String commentsForPost;

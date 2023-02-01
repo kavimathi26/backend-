@@ -26,12 +26,6 @@ public class PostDetails {
     }
 
     public void countOfPosts(String profileId) {
-//        User user = new User();
-//        Post post = new Post();
-//        post.setProfileId(profileId);
-//        user.setPostCount(getPostsByProfileId(profileId).size());
-//        System.out.println("count of post : "+user.getPostCount());
-//        return user.getPostCount();
         User user = userDetails.getUserByProfileId(profileId);
         user.setPostCount(getPostsByProfileId(profileId).size());
         System.out.println(getPostsByProfileId(profileId).size());

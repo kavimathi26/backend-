@@ -16,6 +16,8 @@ import java.util.*;
 public class LikeDetails {
     @Autowired
     MongoTemplate mongoTemplate;
+    @Autowired
+    PostDetails postDetails;
     public List<Post> getPostByPostId(String postId) {
         return mongoTemplate.find(Query.query(Criteria.where("postId").is(postId)), Post.class);
     }
@@ -57,6 +59,12 @@ public class LikeDetails {
 //            return
 //        }
     }
+    public long countLikes(String postId) {
+        Query query = new Query().addCriteria(Criteria.where("postId").is(postId).and("likedOrNot").is(true));
+        mongoTemplate.find(query,Like.class);
+        long len = mongoTemplate.find(query,Like.class).size();
+        return len;
+    }
     public Like likePost(String profileId, String postId) {
 //        Like like = new Like();
 //        like.setPostId(postId);
@@ -74,7 +82,15 @@ public class LikeDetails {
         update.set("unlikedTime",0);
         update.set("likedOrNot",true);
         update.set("likedTime",System.currentTimeMillis());
+//        Post post = new Post();
+//        post.setProfileId(profileId);
+//        postDetails.getPostsByProfileId(profileId);
+//        Post post = new Post();
+//        post.setProfileId(profileId);
+//        post.setLikesCount(countLikes(postId));
+//        post.setLikesCount();
 //        mongoTemplate.save(update);
+//        mongoTemplate.save(post);
         return mongoTemplate.findAndModify(query, update, Like.class);
     }
 //    public Like unLikePost(String profileId, String postId) {
