@@ -1,6 +1,6 @@
 package com.instagram.instaModule.repository;
 import com.instagram.instaModule.model.Post;
-import com.instagram.instaModule.model.User;
+import com.instagram.instaModule.model.Users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -12,11 +12,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PostDetails {
+public class PostRepository {
     @Autowired
     private MongoTemplate mongoTemplate;
     @Autowired
-    UserDetails userDetails;
+    UserRepository userRepository;
     public List<Post> getPostsByProfileId(String profileId) {
         return mongoTemplate.find(Query.query(Criteria.where("profileId").is(profileId)),Post.class);
     }
@@ -26,11 +26,11 @@ public class PostDetails {
     }
 
     public void countOfPosts(String profileId) {
-        User user = userDetails.getUserByProfileId(profileId);
-        user.setPostCount(getPostsByProfileId(profileId).size());
+        Users users = userRepository.getUserByProfileId(profileId);
+        users.setPostCount(getPostsByProfileId(profileId).size());
         System.out.println(getPostsByProfileId(profileId).size());
-        System.out.println(user.getPostCount());
-        mongoTemplate.save(user);
+        System.out.println(users.getPostCount());
+        mongoTemplate.save(users);
     }
     public Post createPost(String profileId, String posts,String caption) { //add-post
     Post post = new Post();

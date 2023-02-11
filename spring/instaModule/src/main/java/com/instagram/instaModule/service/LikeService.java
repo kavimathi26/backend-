@@ -1,7 +1,6 @@
 package com.instagram.instaModule.service;
 
-import com.instagram.instaModule.model.Like;
-import com.instagram.instaModule.repository.LikeDetails;
+import com.instagram.instaModule.repository.LikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +9,7 @@ import java.util.List;
 @Service
 public class LikeService {
     @Autowired
-    LikeDetails likeDetails;
+    LikeRepository likeDetails;
     public String likePost(String profileId, String postId) {
 //        if((likeDetails.getAndSetPost(profileId,postId).isLikedOrNot()==false)) {
         likeDetails.setLikesWithProfileIdAndPostId(profileId,postId);

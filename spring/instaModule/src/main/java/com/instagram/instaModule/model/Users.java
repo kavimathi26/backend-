@@ -6,16 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.awt.*;
-import java.util.ArrayList;
-
 @Getter
 @Setter
 @ToString
 
 @Document(collection = "InstaUser")
-public class User {
-    public User() {
+public class Users {
+    public Users() {
         this.followersCount = 0;
         this.followingCount = 0;
         this.postCount = 0;
@@ -27,6 +24,7 @@ public class User {
     private long followersCount;
     private long followingCount;
     private long postCount;
+
 //    private ArrayList<String> posts = new ArrayList<String>();
 //    ArrayList<String> list=new ArrayList<String>();
 //    private ArrayList posts;

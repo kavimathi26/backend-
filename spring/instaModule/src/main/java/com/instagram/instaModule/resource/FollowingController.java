@@ -1,6 +1,6 @@
 package com.instagram.instaModule.resource;
 
-import com.instagram.instaModule.repository.UserDetails;
+import com.instagram.instaModule.repository.UserRepository;
 import com.instagram.instaModule.service.FollowingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/addFollowing")
 public class FollowingController {
     @Autowired
-    UserDetails userDetails;
+    UserRepository userRepository;
     @Autowired
     FollowingService followingService;
     @PutMapping("/profileId/{profileId}/following/{tobefollowprofileid}")
     public String addFollowing(@PathVariable String profileId, @PathVariable String tobefollowprofileid){
-        if(userDetails.getUserByProfileId(profileId)!=null && userDetails.getUserByProfileId(tobefollowprofileid)!=null)
+        if(userRepository.getUserByProfileId(profileId)!=null && userRepository.getUserByProfileId(tobefollowprofileid)!=null)
         {
             followingService.addFollowing(profileId,tobefollowprofileid);
         }
@@ -25,7 +25,7 @@ public class FollowingController {
     }
     @GetMapping("/profileid/{profileid}")
     public String displayFollowing(@PathVariable String profileid) {
-        if(userDetails.getUserByProfileId(profileid)==null) {
+        if(userRepository.getUserByProfileId(profileid)==null) {
             return "no profile found";
         }
         followingService.displayFollowing(profileid);

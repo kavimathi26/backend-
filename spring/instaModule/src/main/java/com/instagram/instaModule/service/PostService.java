@@ -1,7 +1,7 @@
 package com.instagram.instaModule.service;
 
 import com.instagram.instaModule.model.Post;
-import com.instagram.instaModule.repository.PostDetails;
+import com.instagram.instaModule.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,29 +10,29 @@ import java.util.List;
 @Service
 public class PostService {
     @Autowired
-    PostDetails postDetails;
+    PostRepository postRepository;
     public void createPost(String profileId, String posts, String caption) {
-        postDetails.createPost(profileId,posts,caption);
+        postRepository.createPost(profileId,posts,caption);
     }
 
     public String deletePost(String postId) {
-        postDetails.deletePost(postId);
+        postRepository.deletePost(postId);
         return "deleted";
     }
 
     public List getAllTopPosts() {
-       return postDetails.getAllTopPosts();
+       return postRepository.getAllTopPosts();
     }
 
     public List getPostsByProfileId(String profileId) {
-        return postDetails.getPostsByProfileId(profileId);
+        return postRepository.getPostsByProfileId(profileId);
     }
 
     public List<Post> getTopPosts(String page, String size) {
-        return postDetails.getTopPosts(page,size);
+        return postRepository.getTopPosts(page,size);
     }
 
     public List<Post> findAll() {
-        return postDetails.findAll();
+        return postRepository.findAll();
     }
 }

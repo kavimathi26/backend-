@@ -1,14 +1,14 @@
 package com.instagram.instaModule.repository;
 //package com.instagram.instaModule.repository.FollowerRepository;
 import com.instagram.instaModule.model.Follower;
-import com.instagram.instaModule.model.User;
+import com.instagram.instaModule.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
-import com.instagram.instaModule.model.User;
+
 @Repository
 public class FollowerRepository {
     @Autowired
@@ -16,7 +16,7 @@ public class FollowerRepository {
 //    @Autowired
 //    User user;
     @Autowired
-    UserDetails userDetails;
+UserRepository userRepository;
     public Follower getUserByProfileId(String profileId) {
         return mongoTemplate.findOne(Query.query(Criteria.where("profileId").is(profileId)), Follower.class);
     }
@@ -30,11 +30,11 @@ public class FollowerRepository {
             follower.setProfileId(profileId);
             mongoTemplate.save(follower);
         }
-        User user = userDetails.getUserByProfileId(profileId);
-        user.setFollowersCount(getUserByProfileId(profileId).getFollowerList().size());
+        Users users = userRepository.getUserByProfileId(profileId);
+        users.setFollowersCount(getUserByProfileId(profileId).getFollowerList().size());
         System.out.println(getUserByProfileId(profileId).getFollowerList().size());
-        System.out.println(user.getFollowersCount());
-        mongoTemplate.save(user);
+        System.out.println(users.getFollowersCount());
+        mongoTemplate.save(users);
     }
     public void addFollower(String profileId, String profileIdToBeFollowed) {
         Query query = new Query().addCriteria(Criteria.where("profileId").is(profileId));

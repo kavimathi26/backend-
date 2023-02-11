@@ -1,16 +1,26 @@
 package com.instagram.instaModule.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Getter
-@Setter
-@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Document(collection = "InstaSignUP")
+
 public class SignUp {
-    private String emailId;
+//    @Autowired
+//    PasswordEncoder passwordEncoder;
+//    private String emailId;
+//    private String profileId;
+    private String userName;
+//    private String description;
+//    private long followersCount;
+//    private long followingCount;
+//    private long postCount;
     private String password;
-    private String profileId;
+    private String roles;
+//    private String profileId;
 }

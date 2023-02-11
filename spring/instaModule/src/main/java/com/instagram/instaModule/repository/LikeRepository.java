@@ -2,7 +2,6 @@ package com.instagram.instaModule.repository;
 
 import com.instagram.instaModule.model.Like;
 import com.instagram.instaModule.model.Post;
-import com.instagram.instaModule.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -13,11 +12,11 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 
 @Repository
-public class LikeDetails {
+public class LikeRepository {
     @Autowired
     MongoTemplate mongoTemplate;
     @Autowired
-    PostDetails postDetails;
+    PostRepository postRepository;
     public List<Post> getPostByPostId(String postId) {
         return mongoTemplate.find(Query.query(Criteria.where("postId").is(postId)), Post.class);
     }
